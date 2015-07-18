@@ -97,6 +97,7 @@ $(document).ready(function() {
     }, 100);
     updateInputPlaceholder();
     // ibmresearcher
+    console.log(data.id);console.log(getIdsFromTags());
     getResults([data.id].concat(getIdsFromTags()), loadResults);
 
     // empty text in field
@@ -189,7 +190,7 @@ console.log(dataObj);
       htmlString += '</div>';
       htmlString += '</div>';
       htmlString += '<div class="expert-info col-lg-9 col-md-9 col-xs-9">';
-      htmlString += '<a class="expert-result" href="http://researcher.ibm.com/researcher/view.php?person=' + results[i].id + '" target="_blank">';
+      htmlString += '<a class="concept-name" title="This is where we will show you the '+ results[i].id + ' document">';
       htmlString += '<h2 class="expert-name">';
       htmlString += results[i].label;
       htmlString += '</h2>';
