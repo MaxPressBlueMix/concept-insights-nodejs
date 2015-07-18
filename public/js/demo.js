@@ -37,9 +37,11 @@ $(document).ready(function() {
     if (autocomplete)
       autocomplete.abort();
 
+//the following gives us:
+//http://localhost:3000/label_search?corpus=salesadvisor&user=73a9b89e-4414-47a0-9cb8-0a16e7b46ce3&query=keyword&limit=4
     autocomplete = $.get('/label_search', {
-      corpus:'ibmresearcher',
-      user: 'public',
+      corpus:'salesadvisor',
+      user: '73a9b89e-4414-47a0-9cb8-0a16e7b46ce3',
       query: keyword,
       limit: 4
     }, function(results) {
@@ -113,17 +115,19 @@ $(document).ready(function() {
 
     var dataObj = {
       ids: ids,
-      corpus: 'ibmresearcher',
-      user: 'public',
+      corpus: 'salesadvisor',
+      user: '73a9b89e-4414-47a0-9cb8-0a16e7b46ce3',
       limit: 20
     };
-
+console.log(dataObj);
     $.get('semantic_search', dataObj, callback);
   };
 
   // on success, load results into html
   var loadResults = function(results) {
     $('.loading').hide();
+    console.log("Populating results:");
+    console.log(results);
     populateResults(results.results);
   };
 
@@ -144,6 +148,7 @@ $(document).ready(function() {
     $('.tag-text').each(function() {
       dataIds.push($(this).data('id'));
     });
+    console.log(dataIds);
     return dataIds;
   };
 
@@ -171,6 +176,7 @@ $(document).ready(function() {
   var populateResults = function(results) {
     $('.result').empty();
     var htmlString = '';
+    console.log(results);
     for (var i = 0; i < results.length; i++) {
       htmlString += '<div class="col-lg-6 col-md-6 col-xs-12">';
       htmlString += '<div class="employee-card row" data-id="';
@@ -179,7 +185,7 @@ $(document).ready(function() {
       htmlString += '<div class="overflow-container">'
       htmlString += '<div class="expert-image col-lg-3 col-md-3 col-xs-3">';
       htmlString += '<div class="img-container">';
-      htmlString += '<img src="'+ results[i].user.thumbnail + '"/>';
+//      htmlString += '<img src="'+ results[i].user.thumbnail + '"/>';
       htmlString += '</div>';
       htmlString += '</div>';
       htmlString += '<div class="expert-info col-lg-9 col-md-9 col-xs-9">';
@@ -238,9 +244,9 @@ $(document).ready(function() {
    */
   var createSuggestion = function (item) {
       var htmlString = '<a href="javascript:void(0);" data-id="';
-
-      if (item.type === '/public/ibmresearcher') {
-        htmlString += '/corpus/public/ibmresearcher/'; // if researcher
+console.log(item);
+      if (item.type === '/73a9b89e-4414-47a0-9cb8-0a16e7b46ce3/salesadvisor') {
+        htmlString += '/corpus/73a9b89e-4414-47a0-9cb8-0a16e7b46ce3/salesadvisor/'; // if researcher
       } else {
         htmlString += '/graph/wikipedia/en-20120601/'; // if concept
       }
@@ -252,8 +258,8 @@ $(document).ready(function() {
       htmlString += item.label;
       htmlString += '</h4>';
       htmlString += '<span class="concept-type '+ (item.type === 'concept' ? 'type-concept' : 'type-researcher')+'">';
-      if (item.type == '/public/ibmresearcher') {
-        htmlString += '(IBM Researcher)';
+      if (item.type == '/73a9b89e-4414-47a0-9cb8-0a16e7b46ce3/salesadvisor') {
+        htmlString += '(Corpus Document)';
       } else {
         htmlString += '(' + item.type + ')';
       }

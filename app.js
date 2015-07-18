@@ -28,18 +28,21 @@ require('./config/express')(app);
 // if bluemix credentials exists, then override local
 var credentials = extend({
   version: 'v1',
-  username: '<username>',
-  password: '<password>'
+  username: '72ca0a13-3531-422d-9da5-f10b7567e035',
+  password: 'PsOCij8nY8bP'
 }, bluemix.getServiceCreds('concept_insights')); // VCAP_SERVICES
 
 // Create the service wrapper
 var conceptInsights = watson.concept_insights(credentials);
 
 app.get('/', function(req, res){
+	console.log("doing index");
     res.render('index');
 });
 
 app.get('/label_search', function (req, res) {
+	console.log("doing label_search:");
+	console.log(req.query);
   var payload = extend({
     func:'labelSearch',
     limit: 4,
@@ -56,6 +59,8 @@ app.get('/label_search', function (req, res) {
 });
 
 app.get('/semantic_search', function (req, res) {
+	console.log("doing semantic_search:");
+	console.log(req.query);
   var payload = extend({
     func:'semanticSearch',
   }, req.query);
