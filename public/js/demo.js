@@ -17,6 +17,9 @@
 
 'use strict';
 
+var corpus='solutionExplorer';
+var user='72ca0a13-3531-422d-9da5-f10b7567e035';
+
 $(document).ready(function() {
 
   var autocomplete;
@@ -38,10 +41,10 @@ $(document).ready(function() {
       autocomplete.abort();
 
 //the following gives us:
-//http://localhost:3000/label_search?corpus=salesadvisor&user=73a9b89e-4414-47a0-9cb8-0a16e7b46ce3&query=keyword&limit=4
+//http://localhost:3000/label_search?corpus=salesadvisor&user=72ca0a13-3531-422d-9da5-f10b7567e035&query=keyword&limit=4
     autocomplete = $.get('/label_search', {
-      corpus:'salesadvisor',
-      user: '73a9b89e-4414-47a0-9cb8-0a16e7b46ce3',
+      'corpus':corpus,
+      'user': user,
       query: keyword,
       limit: 4
     }, function(results) {
@@ -116,8 +119,8 @@ $(document).ready(function() {
 
     var dataObj = {
       ids: ids,
-      corpus: 'salesadvisor',
-      user: '73a9b89e-4414-47a0-9cb8-0a16e7b46ce3',
+      'corpus': corpus,
+      'user': user,
       limit: 20
     };
 console.log(dataObj);
@@ -139,7 +142,7 @@ console.log(dataObj);
       $('.query').attr('placeholder','Add more concepts...');
     }
     else{
-      $('.query').attr('placeholder','Type a keyword to search the IBM Research Domain');
+      $('.query').attr('placeholder','Type a keyword to search the '+corpus+' corpus');
     }
   };
 
@@ -190,7 +193,7 @@ console.log(dataObj);
       htmlString += '</div>';
       htmlString += '</div>';
       htmlString += '<div class="expert-info col-lg-9 col-md-9 col-xs-9">';
-      htmlString += '<a class="concept-name" title="This is where we will show you the '+ results[i].id + ' document">';
+      htmlString += '<a class="concept-name" href="/doc?docId='+results[i].id+'" target="_blank">';
       htmlString += '<h2 class="expert-name">';
       htmlString += results[i].label;
       htmlString += '</h2>';
@@ -246,8 +249,8 @@ console.log(dataObj);
   var createSuggestion = function (item) {
       var htmlString = '<a href="javascript:void(0);" data-id="';
 console.log(item);
-      if (item.type === '/73a9b89e-4414-47a0-9cb8-0a16e7b46ce3/salesadvisor') {
-        htmlString += '/corpus/73a9b89e-4414-47a0-9cb8-0a16e7b46ce3/salesadvisor/'; // if researcher
+      if (item.type === '/'+user+'/'+corpus) {
+        htmlString += '/corpus/'+user+'/'+corpus+'/'; // if document
       } else {
         htmlString += '/graph/wikipedia/en-20120601/'; // if concept
       }
@@ -259,7 +262,7 @@ console.log(item);
       htmlString += item.label;
       htmlString += '</h4>';
       htmlString += '<span class="concept-type '+ (item.type === 'concept' ? 'type-concept' : 'type-researcher')+'">';
-      if (item.type == '/73a9b89e-4414-47a0-9cb8-0a16e7b46ce3/salesadvisor') {
+      if (item.type == '/'+user+'/'+corpus) {
         htmlString += '(Corpus Document)';
       } else {
         htmlString += '(' + item.type + ')';
