@@ -16,6 +16,12 @@
 
 'use strict';
 
+var https=require('https');
+
+var username='72ca0a13-3531-422d-9da5-f10b7567e035';
+var password='PsOCij8nY8bP';
+var corpus='solutionExplorer';
+
 var express = require('express'),
   app = express(),
   bluemix = require('./config/bluemix'),
@@ -28,8 +34,8 @@ require('./config/express')(app);
 // if bluemix credentials exists, then override local
 var credentials = extend({
   version: 'v1',
-  username: '72ca0a13-3531-422d-9da5-f10b7567e035',
-  password: 'PsOCij8nY8bP'
+  'username': username,
+  'password': password
 }, bluemix.getServiceCreds('concept_insights')); // VCAP_SERVICES
 
 // Create the service wrapper
@@ -39,6 +45,31 @@ app.get('/', function(req, res){
 	console.log("doing index");
     res.render('index');
 });
+
+
+//retrieve a document: /doc?docId=faq199
+app.get('/doc', function(req,res1) 
+	{
+	console.log("Retrieving document");
+	console.log(req.query);
+	var opts={"hostname":"gateway.watsonplatform.net",
+				"port":443,
+				"path":"/concept-insights-beta/api/v1/corpus/"+username+"/"+corpus+"/"+req.query.docId,
+				"auth":username+":"+password};
+	console.log(opts);
+	var doc=https.get(opts,
+			function(res2) 
+				{
+		  		console.log("Got response: " + res2.statusCode);
+		  		res2.pipe(res1);
+				}
+			)
+	doc.on('error', function(e) 
+		{
+		console.log("Got error: " + e.message);
+		});	
+	});
+
 
 app.get('/label_search', function (req, res) {
 	console.log("doing label_search:");
