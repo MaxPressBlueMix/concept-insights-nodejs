@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>Maximum Press Solution Explorer</title>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon">
+<link rel="icon" href="/images/favicon.ico" type="image/x-icon">
+<link rel="stylesheet" href="/css/watson-bootstrap-dark.css">
+<link rel="stylesheet" href="/css/banner.css">
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-12">
+				<div class="row top-nav">
+					<div class="col-lg-12">
+						<h3 class="heading left">
+							Maximum Press <span>Solution Explorer </span>
+							<span><small>with</small></span>
+							<span>IBM Watson</span>
+						</h3>
+						<a href="http://www.ibm.com/smarterplanet/us/en/ibmwatson/developercloud/doc/concept-insights/"
+							class="right">Documentation</a><a
+							href="http://www.ibm.com/smarterplanet/us/en/ibmwatson/developercloud/apis/#!/concept-insights"
+							class="right">API Details</a>
+					</div>
+				</div>
+				<div style="padding-bottom: 0px;" class="row header">
+					<div class="avatar img-container col-lg-1 col-xs-1">
+						<img src="/images/app.png">
+					</div>
+					<div class="col-lg-6 col-xs-6">
+						<h2>Solution Explorer</h2>
+						<p>Maximum Press Solution Explorer uses IBM Watson's concepts based 
+							on Wikipedia articles, such as 'Cognitive Systems' and 'Server Backup', 
+							to search for relevant documents about IBM technology solutions
+							for businesses.
+							</p>
+						<a href="http://www.ibm.com/smarterplanet/us/en/ibmwatson/developercloud/concept-insights.html"
+							class="learn-more">More about the IBM Watson Concept Insights service</a>
+					</div>
+					<div class="col-lg-4 col-xs-4 build-your-own">
+						&nbsp;
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-lg-12 col-xs-12">
+				<h2>Concept Search</h2>
+				<p>The IBM Watson Concept Insights API in this application has built a
+					body of knowledge around the technology solutions offered by IBM, not
+					just using keyword searching.</p>
+				<p>You can query concepts or topics relevant to a business problem or opportunity
+					 that aren't actually in any database.</p>
+				<div class="tags-container"></div>
+				<div class="input-container">
+					<input name="query" placeholder=" Try 'Server' or 'FAQ'"
+						required="true" value="" autocomplete="off"
+						data-provide="typeahead" class="form-control query">
+					<div data-toggle="dropdown" class="suggestions dropdown">
+						<ul></ul>
+					</div>
+				</div>
+			</div>
+			<div class="col-lg-12 col-xs-12">
+				<h2>Results</h2>
+				<div>
+					<div style="display: none" class="errorMsg">
+						<p>Internal Server Issue. Try refreshing and see if it's
+							working again.</p>
+					</div>
+					<div style="display: none" class="row loading">
+						<div class="col-lg-12 col-xs-12 text-center">
+							<img src="images/watson.gif">
+						</div>
+					</div>
+					<div style="display: none" class="result"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script type="text/javascript" src="/js/jquery-1.11.1.min.js"></script>
+	<script type="text/javascript" src="/js/demo.js"></script>
+</body>
+</html>

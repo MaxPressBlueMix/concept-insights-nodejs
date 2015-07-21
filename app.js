@@ -43,7 +43,8 @@ var conceptInsights = watson.concept_insights(credentials);
 
 app.get('/', function(req, res){
 	console.log("doing index");
-    res.render('index');
+	res.sendFile("index.html",{"root":"views"});
+    //res.render('index');
 });
 
 
