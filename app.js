@@ -57,16 +57,26 @@ app.get('/doc', function(req,res1)
 				"path":"/concept-insights-beta/api/v1/corpus/"+username+"/"+corpus+"/"+req.query.docId,
 				"auth":username+":"+password};
 	console.log(opts);
-	var doc=https.get(opts,
+	var req2=https.get(opts,
 			function(res2) 
 				{
 		  		console.log("Got response: " + res2.statusCode);
-		  		res2.pipe(res1);
+		  		var body = '';
+		  		res2.on('data', function(chunk) 
+		  			{
+		  			body += chunk;
+		  			});
+		  		res2.on('end', function() 
+		  			{
+		  			body=JSON.parse(body).parts[0].data;
+		  			res1.send(body);
+		  			});
 				}
 			)
-	doc.on('error', function(e) 
+	req2.on('error', function(e) 
 		{
 		console.log("Got error: " + e.message);
+		res1.send(e.message);
 		});	
 	});
 
