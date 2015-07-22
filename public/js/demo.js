@@ -189,7 +189,8 @@ console.log(dataObj);
       htmlString += '<div class="overflow-container">'
       htmlString += '<div class="expert-image col-lg-3 col-md-3 col-xs-3">';
       htmlString += '<div class="img-container">';
-//      htmlString += '<img src="'+ results[i].user.thumbnail + '"/>';
+//    htmlString += '<img src="'+ results[i].user.thumbnail + '"/>';
+      htmlString += '<img src="/images/sunset.jpg"/>';
       htmlString += '</div>';
       htmlString += '</div>';
       htmlString += '<div class="expert-info col-lg-9 col-md-9 col-xs-9">';
