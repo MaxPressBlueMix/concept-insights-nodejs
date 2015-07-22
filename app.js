@@ -69,8 +69,9 @@ app.get('/doc', function(req,res1)
 		  			});
 		  		res2.on('end', function() 
 		  			{
-		  			body=JSON.parse(body).parts[0].data;
-		  			res1.send(body);
+		  			body=JSON.parse(body).parts[1].data; //URL of original document
+//		  			res1.send(body);
+		  			res1.redirect(body);
 		  			});
 				}
 			)

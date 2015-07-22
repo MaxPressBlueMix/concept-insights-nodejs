@@ -1,3 +1,9 @@
+body {
+    background-image: url("/images/sunset.jpg");
+    background-size: 100%;
+    background-attachment: fixed;
+}
+
 .logo {
 	float: left;
 	margin-left: 25px;
